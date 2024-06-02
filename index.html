@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CALCULATOR LOGIC</title>
+    <style>
+        #result{
+            width: 100%;
+            height: 80px;
+            padding: 10px;
+            font-size: 50px;
+            box-sizing: border-box;
+        }
+        .numbtn, .numbtns{
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 2em;
+            width: 70px;
+            height: 70px;
+            text-align: center;
+            margin: 5px;
+            box-sizing: border-box;
+            background-color: #d4d4d2;
+        }
+        .numbtns{
+            background-color: #ff9500;
+        }
+        .result{
+            border-radius: 10px;
+            font-size: 1.5em;
+            background-color: black;
+            color: #d4d4d2;
+            text-align: right;
+        }
+        .clearbtn{
+            padding: 15px;
+            font-size: 2em;
+            width: 150px;
+            height: 70px;
+            text-align: center;
+            margin: 5px;
+            border-radius: 10px;
+            background-color: #ff9500;
+        }
+        .delbtn{
+            padding: 15px;
+            font-size: 2em;
+            width: 150px;
+            height: 70px;
+            text-align: center;
+            margin: 5px;
+            border-radius: 10px;
+            background-color: #ff9500;
+        }
+        .equalbtn{
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 2em;
+            width: 70px;
+            height: 70px;
+            text-align: center;
+            margin: 5px;
+            box-sizing: border-box;
+            background-color: #ff9500;
+        }
+        .calcu{
+            margin: auto;
+            max-width: 350px;
+            background-color: black;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px  #d4d4d2;
+        }
+        body{
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        @media screen and (max-width: 600px) {
+            .numbtn, .numbtns {
+                padding: 10px;
+                font-size: 1.5em;
+                width: 50px;
+                height: 50px;
+            }
+            .equalbtn{
+                padding: 10px;
+                font-size: 1.5em;
+                width: 50px;
+                height: 50px;
+            }
+            
+            .result {
+                font-size: 1.2em;
+                height: 40px;
+            }
+            .calcu{
+                padding: 10px;
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calcu">
+        <div class="calcu2">
+            <h1 style="color: white; text-align: center;">CALCULATOR APP</h1>
+            <table style="width: 100%; table-layout: fixed;">
+                <tr>
+                    <td colspan="4"><input type="text" id="result" disabled class="result"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="button" value="C" onclick="clearInput()" class="clearbtn"></td>
+                    <td colspan="2"><input type="button" value="DEL" onclick="DelInput()" class="delbtn"></td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="1" onclick="appendNum(1)" class="numbtn"></td>
+                    <td><input type="button" value="2" onclick="appendNum(2)" class="numbtn"></td>
+                    <td><input type="button" value="3" onclick="appendNum(3)" class="numbtn"></td>
+                    <td><input type="button" value="/" onclick="devide()" class="numbtns"></td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="4" onclick="appendNum(4)" class="numbtn"></td>
+                    <td><input type="button" value="5" onclick="appendNum(5)" class="numbtn"></td>
+                    <td><input type="button" value="6" onclick="appendNum(6)" class="numbtn"></td>
+                    <td><input type="button" value="*" onclick="times()" class="numbtns"></td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="7" onclick="appendNum(7)" class="numbtn"></td>
+                    <td><input type="button" value="8" onclick="appendNum(8)" class="numbtn"></td>
+                    <td><input type="button" value="9" onclick="appendNum(9)" class="numbtn"></td>
+                    <td><input type="button" value="-" onclick="minus()" class="numbtns"></td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="." onclick="appendNum('.')" class="numbtn"></td>
+                    <td><input type="button" value="0" onclick="appendNum('0')" class="numbtn"></td>
+                    <td><input type="button" value="=" onclick="calculate()" class="equalbtn"></td>
+                    <td><input type="button" value="+" onclick="add()" class="numbtns"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        let currentInput = '';
+        let currentOpe = '';
+
+        function clearInput() {
+            currentInput = '';
+            currentOpe = '';
+            document.getElementById('result').value = '';
+        }
+
+        function appendNum(number) {
+            currentInput += number;
+            document.getElementById('result').value = currentInput;
+        }
+
+        function add() {
+            currentOpe = '+';
+            currentInput += currentOpe;
+            document.getElementById('result').value = currentInput;
+        }
+
+        function minus() {
+            currentOpe = '-';
+            currentInput += currentOpe;
+            document.getElementById('result').value = currentInput;
+        }
+
+        function times() {
+            currentOpe = '*';
+            currentInput += currentOpe;
+            document.getElementById('result').value = currentInput;
+        }
+
+        function devide() {
+            currentOpe = '/';
+            currentInput += currentOpe;
+            document.getElementById('result').value = currentInput;
+        }
+
+        function calculate() {
+            const result = eval(currentInput);
+            document.getElementById('result').value = result;
+            currentInput = result.toString();
+            currentOpe = '';
+        }
+
+        function DelInput() {
+            currentInput = currentInput.slice(0, -1);
+            document.getElementById('result').value = currentInput;
+        }
+    </script>
+</body>
+</html>
